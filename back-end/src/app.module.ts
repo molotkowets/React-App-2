@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TaskManagementModule } from './task-management/task-management.module';
 import { join, relative } from 'path';
 import { LoggerModule, Params } from 'nestjs-pino';
+import { BoardsModule } from './boards/boards.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -25,6 +26,7 @@ import * as Joi from 'joi';
           autoLoadEntities: true,
           migrations: [join(dbDir, 'migrations', '*.{ts,js}')],
           synchronize: false,
+          logging: configService.get('NODE_ENV') === 'dev',
         };
       },
       inject: [ConfigService],
@@ -58,6 +60,7 @@ import * as Joi from 'joi';
         ],
       }),
     }),
+    BoardsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

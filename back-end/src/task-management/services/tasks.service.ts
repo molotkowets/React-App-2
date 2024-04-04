@@ -1,10 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { TaskEntity } from '../entities/task.entity';
 import { TaskListsService } from './task-lists.service';
 import { PartialUpdateTaskDto } from '../dto/partial-update-task.dto';
+import { BoardsService } from '../../boards/boards.service';
 
 @Injectable()
 export class TasksService {
@@ -12,10 +17,14 @@ export class TasksService {
     @InjectRepository(TaskEntity)
     private taskRepository: Repository<TaskEntity>,
     private taskListsService: TaskListsService,
+    private boardsService: BoardsService,
   ) {}
 
   async create(payload: CreateTaskDto): Promise<TaskEntity> {
-    await this.taskListsService.existsOrFail(payload.taskListId);
+    await Promise.all([
+      this.taskListsService.existsOrFail(payload.taskListId),
+      this.boardsService.existsOrFail(payload.boardId),
+    ]);
 
     const task = this.taskRepository.create(payload);
     return this.taskRepository.save(task);
@@ -39,14 +48,19 @@ export class TasksService {
     id: number,
     payload: PartialUpdateTaskDto,
   ): Promise<TaskEntity> {
-    const entity = await this.taskRepository.findOneBy({ id });
+    const [entity, taskList] = await Promise.all([
+      this.taskRepository.findOneBy({ id }),
+      payload.taskListId
+        ? this.taskListsService.findOneById(payload.taskListId)
+        : null,
+    ]);
 
     if (!entity) {
       throw new NotFoundException('task not found');
     }
 
-    if (payload.taskListId) {
-      await this.taskListsService.existsOrFail(payload.taskListId);
+    if (payload.taskListId && taskList.boardId !== entity.boardId) {
+      throw new ConflictException('Cannot move task to another board');
     }
 
     this.taskRepository.merge(entity, payload);

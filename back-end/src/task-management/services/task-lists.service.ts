@@ -4,21 +4,39 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateTaskListDto } from '../dto/create-task-list.dto';
 import { PartialUpdateTaskListDto } from '../dto/partial-update-task-list.dto';
+import { FetchTaskListsQueryDto } from '../dto/fetch-task-lists.query.dto';
+import { BoardsService } from '../../boards/boards.service';
 
 @Injectable()
 export class TaskListsService {
   constructor(
     @InjectRepository(TaskListEntity)
     private taskListsRepository: Repository<TaskListEntity>,
+    private boardsService: BoardsService,
   ) {}
 
   async create(payload: CreateTaskListDto): Promise<TaskListEntity> {
+    await this.boardsService.existsOrFail(payload.boardId);
     const taskList = this.taskListsRepository.create(payload);
+
     return this.taskListsRepository.save(taskList);
   }
 
-  findAll(): Promise<TaskListEntity[]> {
-    return this.taskListsRepository.find({ relations: { tasks: true } });
+  findAll(query: FetchTaskListsQueryDto): Promise<TaskListEntity[]> {
+    return this.taskListsRepository.find({
+      relations: { tasks: true },
+      where: { boardId: query.boardId },
+    });
+  }
+
+  async findOneById(id: number): Promise<TaskListEntity> {
+    const entity = await this.taskListsRepository.findOneBy({ id });
+
+    if (!entity) {
+      throw new NotFoundException('task list not found');
+    }
+
+    return entity;
   }
 
   async existsOrFail(id: number): Promise<true> {
