@@ -1,0 +1,59 @@
+.task-board-container{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 35px;
+    padding-bottom: 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+.tb-column-container{
+    display: flex;
+    overflow-x: auto;
+    /* overflow-y: hidden; */
+    scrollbar-color: #c5c5c5 #ffffff00;
+    scrollbar-width: auto;
+    width: 100%;
+    height: 100%;
+}
+.task-board-container h1{
+    margin: 20px 0;
+}
+.tb-header{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.tb-header-buttons-container{
+    display: flex;
+    align-items: center;
+}
+.tb-header-button{
+    display: flex;
+    height: 30px;
+    align-items: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0 10px;
+    margin-left: 10px;
+    font-weight: 500;
+}
+.tb-button-add{
+    background: #5d6481;
+    color: white;
+}
+.tb-button-his{
+    background: white;
+    border: solid 1px #5d6481;
+}
+.tb-button-icon{
+    width: 15px;
+    height: 15px;
+    padding-right: 6px;
+}
+.tb-header-btn-send{
+    border: none;
+    outline: none;
+    background: none;
+}

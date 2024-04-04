@@ -1,0 +1,83 @@
+.task-list-container{
+    min-width: 240px;
+    max-width: 280px;
+}
+.tl-header-menu-icon{
+    display: flex;
+    height: 16px;
+    justify-content: center;
+    padding: 0 5px;
+    cursor: pointer;
+}
+.tl-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: solid 1px #c5c5c5 ;
+    border-bottom: solid 1px #c5c5c5;
+    padding:4px 0 4px 0;
+}
+.tl-header-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.tl-header-title h2{
+    padding: 0;
+    margin: 0;
+}
+.tl-header-title span{
+    margin-right: 10px;
+}
+.task-list-container:not(:last-child){
+    margin-right: 25px;
+}
+.tl-button-container{
+    display: flex;
+}
+.tl-button-add-icon{
+    display: flex;
+    height: 16px;
+    width: 16px;
+}
+.tl-button-add{
+    display: flex;
+    width: 100%;
+    background: none;
+    border: dashed 1px #c5c5c5;
+    border-radius: 8px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    cursor: pointer;
+}
+.tl-header-menu{
+    display: flex;
+    position: relative;
+}
+.tl-form-edit-list{
+    display: flex;
+    padding-right: 10px;
+}
+.tl-form-edit-list input{
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 8.5px;
+}
+.tl-form-edit-list button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    height: 100%;
+    align-self: center;
+    background: #5d6481;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    font-size: 12px;
+}

@@ -1,0 +1,25 @@
+.modal-wrapper{
+    display: flex;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    
+    background: #44444444;
+}
+.modal-to-close-btn{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+}
+.modal-container{
+    display: flex;
+    border-radius: 10px;
+    background: #fff;
+    flex-direction: column;
+    z-index: 15;
+    margin: 20px;
+}

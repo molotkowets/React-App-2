@@ -1,0 +1,22 @@
+.history-container{
+    flex-direction: row-reverse;
+}
+.h-to-close-btn{
+   
+}
+.h-list-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 100%;
+    background: #f3f4f6;
+    z-index: 15;
+}
+.h-l-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: #5d6481;
+    color: #fff;
+}
