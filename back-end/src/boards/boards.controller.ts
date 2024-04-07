@@ -17,7 +17,7 @@ import { PartialUpdateBoardDto } from './dto/partial-update-board.dto';
 export class BoardsController {
   constructor(private readonly boardsService: BoardsService) {}
 
-  @Post('create')
+  @Post()
   create(@Body() dto: CreateBoardDto): Promise<BoardEntity> {
     return this.boardsService.create(dto);
   }

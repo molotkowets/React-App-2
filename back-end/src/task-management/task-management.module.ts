@@ -6,7 +6,7 @@ import { TaskListsService } from './services/task-lists.service';
 import { TaskEntity } from './entities/task.entity';
 import { TasksController } from './controllers/tasks.controller';
 import { TasksService } from './services/tasks.service';
-import { BoardsModule } from 'src/boards/boards.module';
+import { BoardsModule } from '../boards/boards.module';
 
 @Module({
   imports: [
