@@ -7,6 +7,7 @@ import { TaskManagementModule } from './task-management/task-management.module';
 import { join, relative } from 'path';
 import { LoggerModule, Params } from 'nestjs-pino';
 import { BoardsModule } from './boards/boards.module';
+import { HistoryModule } from './history/history.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -67,6 +68,7 @@ import * as Joi from 'joi';
       inject: [ConfigService],
     }),
     BoardsModule,
+    HistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
