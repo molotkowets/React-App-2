@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import "./edit-card.css";
 import { ReactComponent as CloseIcon } from "../../assets/icons/close.svg";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import { type ITaskLists, type ITasks } from "../task-list/TaskList";
+import { type ITaskLists } from "../task-list/TaskList";
 import InputError from "../inputError/InputError";
 import { useNavigate } from "react-router-dom";
-import { editTask } from "../../queries/edit-task-card.query";
-import { formatDateToForm } from "../../other/formatDate";
+// import { editTask } from "../../queries/edit-task-card.query";
+import { formatDateToForm } from "../../utils/formatDate";
+import { type ITask } from "../../types/queries.types";
 export interface ICardForm {
     name: string;
     description: string;
@@ -16,7 +17,7 @@ export interface ICardForm {
 }
 interface IAddCard {
     toClose: React.Dispatch<React.SetStateAction<boolean>>;
-    cardData: ITasks;
+    cardData: ITask;
     taskLists: ITaskLists[];
 }
 
@@ -28,15 +29,15 @@ export default function EditCard({ toClose, cardData, taskLists }: IAddCard): JS
     } = useForm<ICardForm>();
     const navigate = useNavigate();
 
-    const [formStat, setFormState] = useState<ICardForm | null>(null);
-    const { status } = editTask(formStat, cardData.id);
+    // const [formStat, setFormState] = useState<ICardForm | null>(null);
+    // const { status } = editTask(formStat, cardData.id);
 
     if (status === "success") {
         navigate(0);
     }
 
     const onSubmit: SubmitHandler<ICardForm> = (data) => {
-        setFormState(data);
+        // setFormState(data);
     };
 
     return (

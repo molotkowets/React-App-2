@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import "./taskCard.css";
+import "./task.css";
 import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
 import { ReactComponent as DateIcon } from "../../assets/icons/date.svg";
 // import { type ITaskLists } from "../task-list/TaskList";
 import EditMenuCard from "../editMenu/EditMenuCard";
 import Priority from "../priority/Priority";
 import Dropdown from "../dropdown/Dropdown";
-import CardBoard from "../cardBoard/CardBoard";
-import { type ITaskLists, type ITasks } from "../task-list/TaskList";
-import { formatDate } from "../../other/formatDate";
+import CardBoard from "../taskBoard/TaskBoard";
+import { type ITaskLists } from "../task-list/TaskList";
+import { formatDate } from "../../utils/formatDate";
+import { type ITask } from "../../types/queries.types";
 
 export interface TTasks {
     name: string;
@@ -19,17 +20,20 @@ export interface TTasks {
 }
 interface ITaskCard {
     key: number;
-    data: ITasks;
+    data: ITask;
     listId: number;
     taskLists: ITaskLists[];
 }
-export default function TaskCard({ data, listId, taskLists }: ITaskCard): JSX.Element {
+export default function Task({ data, listId, taskLists }: ITaskCard): JSX.Element {
     const [cardBoardModal, setCardBoardModal] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const listName = taskLists.find((i) => i.id === listId)?.name;
 
     return (
         <div className="tc-container">
-            {cardBoardModal && <CardBoard toClose={setCardBoardModal} />}
+            {cardBoardModal && (
+                <CardBoard listName={listName} data={data} toClose={setCardBoardModal} />
+            )}
             <div
                 onClick={() => {
                     setCardBoardModal(true);

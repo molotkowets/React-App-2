@@ -2,52 +2,38 @@ import React, { useState } from "react";
 import "./taskList.css";
 import { ReactComponent as Menu } from "../../assets/icons/menu.svg";
 import { ReactComponent as Add } from "../../assets/icons/add.svg";
-import TaskCard from "../task-card/TaskCard";
 import EditMenuList from "../editMenu/EditMenuList";
 import AddCard from "../addCard/AddCard";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import { type IParams, removeNameList } from "../../queries/remove-name-list.query";
-import { useNavigate } from "react-router-dom";
+import { useMutateRenameList } from "../../queries/rename-list.query";
+import Task from "../task/Task";
+import { type ITask } from "../../types/queries.types";
 
-export interface ITasks {
-    id: number;
-    name: string;
-    description: string;
-    dueDate: string;
-    priority: string;
-    taskListId: number;
-}
 export interface ITaskLists {
-    name: string;
     id: number;
-    tasks: ITasks[];
+    name: string;
+    boardId: number;
+    tasks: ITask[];
 }
 interface ITaskList {
-    title: string;
-    id: number;
     taskLists: ITaskLists[];
+    list: ITaskLists;
 }
-// interface IInput {
-//     name: string;
-// }
+interface IInput {
+    name: string;
+}
 
-export default function TaskList({ title, id, taskLists }: ITaskList): JSX.Element {
-    const { register, handleSubmit } = useForm<IParams>();
-    const navigate = useNavigate();
+export default function TaskList({ list, taskLists }: ITaskList): JSX.Element {
+    const { register, handleSubmit } = useForm<IInput>();
     const [menuOpen, setMenuOpen] = useState(false);
     const [addCardModal, setAddCardModal] = useState(false);
     const [editListName, setEditListName] = useState(false);
-    const [formStat, setFormState] = useState<IParams | null>(null);
+    const renameList = useMutateRenameList();
+    const tasksNoId = taskLists.find((v) => v.id === list.id);
 
-    const { status } = removeNameList(formStat, id);
-
-    if (status === "success") {
-        navigate(0);
-    }
-    const tasksNoId = taskLists.find((v) => v.id === id);
-
-    const onSubmit: SubmitHandler<IParams> = (data) => {
-        setFormState(data);
+    const onSubmit: SubmitHandler<IInput> = (data) => {
+        renameList.mutate({ ...data, id: list.id });
+        setEditListName(false);
     };
 
     return (
@@ -59,17 +45,17 @@ export default function TaskList({ title, id, taskLists }: ITaskList): JSX.Eleme
                             <input
                                 {...register("name", {
                                     required: "Name is require field!",
-                                    value: title,
+                                    value: list.name,
                                 })}
                                 type="text"
                             />
                             <button>Edit</button>
                         </form>
                     ) : (
-                        <h2>{title}</h2>
+                        <h2>{list.name}</h2>
                     )}
 
-                    <span>{tasksNoId?.tasks.length}</span>
+                    <span>{list.tasks.length}</span>
                 </div>
                 <div className="tl-header-menu">
                     <Menu
@@ -81,7 +67,7 @@ export default function TaskList({ title, id, taskLists }: ITaskList): JSX.Eleme
                     {menuOpen && (
                         <EditMenuList
                             setEditListName={setEditListName}
-                            id={id}
+                            id={list.id}
                             setAddCardModal={setAddCardModal}
                             toClose={setMenuOpen}
                         />
@@ -89,7 +75,7 @@ export default function TaskList({ title, id, taskLists }: ITaskList): JSX.Eleme
                 </div>
             </div>
             {addCardModal && (
-                <AddCard toClose={setAddCardModal} listStatus={taskLists} listId={id} />
+                <AddCard toClose={setAddCardModal} taskLists={taskLists} list={list} />
             )}
             <div className="tl-button-container">
                 <button
@@ -103,7 +89,7 @@ export default function TaskList({ title, id, taskLists }: ITaskList): JSX.Eleme
             </div>
             <div className="tl-task-cads">
                 {tasksNoId?.tasks.map((i, key) => (
-                    <TaskCard taskLists={taskLists} listId={id} key={key} data={i} />
+                    <Task taskLists={taskLists} listId={list.id} key={key} data={i} />
                 ))}
             </div>
         </div>

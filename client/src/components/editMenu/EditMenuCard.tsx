@@ -2,26 +2,29 @@ import React, { useState } from "react";
 import "./editMenu.css";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
 import { ReactComponent as TrashCan } from "../../assets/icons/trash-can.svg";
-import { deleteTask } from "../../queries/delete-task.query";
-import { useNavigate } from "react-router-dom";
+// import { deleteTask } from "../../queries/delete-task.query";
+// import { useNavigate } from "react-router-dom";
 import EditCard from "../editCard/EditCard";
-import { type ITaskLists, type ITasks } from "../task-list/TaskList";
+import { type ITaskLists } from "../task-list/TaskList";
+import { useMutateDeleteTask } from "../../queries/delete-task.query";
+import { type ITask } from "../../types/queries.types";
 
 interface IEditMenu {
     toClose: React.Dispatch<React.SetStateAction<boolean>>;
     id: number;
-    cardData: ITasks;
+    cardData: ITask;
     taskLists: ITaskLists[];
 }
 export default function EditMenuCard({ toClose, id, cardData, taskLists }: IEditMenu): JSX.Element {
-    const [deleteId, setDeleteId] = useState<number | null>(null);
+    // const [deleteId, setDeleteId] = useState<number | null>(null);
     const [editCardModal, setEditCardModal] = useState(false);
-    const navigate = useNavigate();
-    const { status } = deleteTask(deleteId);
+    const { mutate } = useMutateDeleteTask();
+    // const navigate = useNavigate();
+    // const { status } = deleteTask(deleteId);
 
-    if (status === "success") {
-        navigate(0);
-    }
+    // if (status === "success") {
+    //     navigate(0);
+    // }
 
     return (
         <div>
@@ -43,7 +46,7 @@ export default function EditMenuCard({ toClose, id, cardData, taskLists }: IEdit
                 </button>
                 <button
                     onClick={() => {
-                        setDeleteId(id);
+                        mutate(id);
                     }}
                     className="em-button">
                     <TrashCan className="em-btn-icon" /> <span>Delete</span>

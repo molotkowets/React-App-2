@@ -1,0 +1,6 @@
+.board-container {
+    @apply w-full h-full;
+    padding: 100px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}

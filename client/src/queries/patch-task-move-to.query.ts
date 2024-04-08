@@ -1,27 +1,32 @@
-import { type DefaultError, useQuery, type UseQueryResult } from "@tanstack/react-query";
+import { useQueryClient, useMutation, type UseMutationResult } from "@tanstack/react-query";
 import { type AxiosResponse } from "axios";
 import tasksService from "../services/tasks.service";
-// import { type ICardForm } from "../components/addCard/AddCard";
-interface IParams {
-    taskListId: number | null;
-}
-interface IResponse {
+import { type ITask } from "../types/queries.types";
+
+interface IData {
     id: number;
     name: string;
-    description: string;
-    dueDate: string;
-    priority: string;
+    boardId: number;
+}
+
+export interface IPayload {
+    id: number;
     taskListId: number;
 }
-export const taskMoveTo = (
-    params: IParams,
-    id: number
-): UseQueryResult<AxiosResponse<IResponse>> => {
-    return useQuery<AxiosResponse<IResponse>, DefaultError, AxiosResponse<IResponse>, [string]>({
-        queryKey: ["add-task"],
-        enabled: Boolean(params.taskListId),
-        queryFn: async () => {
-            return await tasksService.moveTo<IParams, IResponse>(params, id);
+export const useMutateTaskMoveTo = (): UseMutationResult<
+    AxiosResponse<IData, any>,
+    Error,
+    IPayload,
+    unknown
+> => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (payload: IPayload) =>
+            await tasksService.moveTo<ITask>(payload.taskListId, payload.id),
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({
+                queryKey: ["get-lists"],
+            });
         },
     });
 };

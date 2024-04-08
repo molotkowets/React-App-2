@@ -2,22 +2,31 @@ import axios, { type AxiosResponse } from "axios";
 
 class ListService {
     private readonly URL = "http://localhost:3000/";
-    async getAll<T>(): Promise<AxiosResponse<T>> {
-        return await axios.get(`${this.URL}task-lists`);
-        // return data;
+    async getAll<T>(boardId: number): Promise<AxiosResponse<T>> {
+        return await axios.get(`${this.URL}task-lists`, {
+            params: {
+                boardId,
+            },
+        });
     }
 
-    async addList<T, R>(params: T): Promise<AxiosResponse<R>> {
-        return await axios.post(`${this.URL}task-lists`, params);
+    async addList<R>(name: string, boardId: number): Promise<AxiosResponse<R>> {
+        console.log({
+            name,
+            boardId,
+        });
+        return await axios.post(`${this.URL}task-lists`, {
+            name,
+            boardId,
+        });
     }
 
-    async deleteList<R>(id: number | null): Promise<AxiosResponse<R>> {
-        const ids = id != null ? id : "";
-        return await axios.delete(`${this.URL}task-lists/${ids}`);
+    async deleteList<R>(id: number): Promise<AxiosResponse<R>> {
+        return await axios.delete(`${this.URL}task-lists/${id}`);
     }
 
-    async removeName<T, R>(params: T, id: number): Promise<AxiosResponse<R>> {
-        return await axios.patch(`${this.URL}task-lists/${id}`, params);
+    async removeName<R>(name: string, id: number): Promise<AxiosResponse<R>> {
+        return await axios.patch(`${this.URL}task-lists/${id}`, { name });
     }
 }
 export default new ListService();

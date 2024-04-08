@@ -1,0 +1,12 @@
+.header-button-add {
+    background: #5d6481;
+    color: white;
+}
+.header-button input {
+    color: black;
+}
+.header-btn-send {
+    border: none;
+    outline: none;
+    background: none;
+}

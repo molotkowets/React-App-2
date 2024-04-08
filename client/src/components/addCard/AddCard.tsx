@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import "./addCard.css";
 import { ReactComponent as CloseIcon } from "../../assets/icons/close.svg";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { type ITaskLists } from "../task-list/TaskList";
 import InputError from "../inputError/InputError";
-import { addTask } from "../../queries/add-task.query";
-import { useNavigate } from "react-router-dom";
+import { useMutateAddCard } from "../../queries/add-task.query";
+
 export interface ICardForm {
     name: string;
     description: string;
@@ -15,28 +15,27 @@ export interface ICardForm {
 }
 interface IAddCard {
     toClose: React.Dispatch<React.SetStateAction<boolean>>;
-    listStatus: ITaskLists[];
-    listId: number;
+    taskLists: ITaskLists[];
+    list: ITaskLists;
 }
 
-export default function AddCard({ toClose, listStatus, listId }: IAddCard): JSX.Element {
+export default function AddCard({ toClose, taskLists, list }: IAddCard): JSX.Element {
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<ICardForm>();
-    const navigate = useNavigate();
-    const defaultValue = listStatus.find((v) => v.id === listId);
-    const [formStat, setFormState] = useState<ICardForm | null>(null);
-    const { status } = addTask(formStat);
 
-    if (status === "success") {
-        navigate(0);
-    }
+    const { mutate, isSuccess } = useMutateAddCard();
 
     const onSubmit: SubmitHandler<ICardForm> = (data) => {
-        setFormState(data);
+        mutate({ ...data, boardId: list.id });
+        console.log(isSuccess);
     };
+
+    if (isSuccess) {
+        toClose(false);
+    }
 
     return (
         <div className="add-card-wrapper modal-wrapper">
@@ -73,10 +72,7 @@ export default function AddCard({ toClose, listStatus, listId }: IAddCard): JSX.
                                 <textarea
                                     {...register("description", {
                                         required: "Description is require field!",
-                                    })}
-                                    // name="Description"
-                                    // id="Description"
-                                ></textarea>
+                                    })}></textarea>
                                 {errors.name != null && (
                                     <InputError error={errors.description?.message} />
                                 )}
@@ -107,11 +103,11 @@ export default function AddCard({ toClose, listStatus, listId }: IAddCard): JSX.
                                     {...register("taskListId", {
                                         required: true,
                                     })}
-                                    defaultValue={defaultValue?.id}>
+                                    defaultValue={list.id}>
                                     <option value="value0" disabled>
                                         Task list:
                                     </option>
-                                    {listStatus.map((v, key) => (
+                                    {taskLists.map((v, key) => (
                                         <option key={key} value={v.id}>
                                             {v.name}
                                         </option>
