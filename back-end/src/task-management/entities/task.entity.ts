@@ -18,9 +18,13 @@ import {
 } from 'typeorm';
 import { TaskPriorityEnum } from '../enum/task-priority.enum';
 import { TaskListEntity } from './task-list.entity';
+import { BoardEntity } from '../../boards/entities/board.entity';
 
 @Entity({
   name: 'tasks',
+  orderBy: {
+    id: 'ASC',
+  },
 })
 export class TaskEntity {
   @PrimaryGeneratedColumn()
@@ -71,6 +75,13 @@ export class TaskEntity {
   @Type(() => Number)
   taskListId: number;
 
+  @Column({ type: 'int', name: 'board_id' })
+  @IsNotEmpty()
+  @IsInt()
+  @IsPositive()
+  @Type(() => Number)
+  boardId: number;
+
   @JoinColumn({
     name: 'task_list_id',
   })
@@ -79,4 +90,13 @@ export class TaskEntity {
   })
   @Type(() => TaskListEntity)
   taskList: TaskListEntity;
+
+  @JoinColumn({
+    name: 'board_id',
+  })
+  @ManyToOne(() => BoardEntity, (board) => board.tasks, {
+    onDelete: 'CASCADE',
+  })
+  @Type(() => BoardEntity)
+  board: BoardEntity;
 }

@@ -1,19 +1,30 @@
-import { type DefaultError, useQuery, type UseQueryResult } from "@tanstack/react-query";
+import { type UseMutationResult, useQueryClient, useMutation } from "@tanstack/react-query";
 import { type AxiosResponse } from "axios";
 import listService from "../services/list.service";
 interface IRequest {
     name: string;
     id: number;
+    boardId: number;
 }
-export interface IParams {
+export interface IPayload {
     name: string;
+    boardId: number;
 }
-export const addTaskList = (params: IParams | null): UseQueryResult<AxiosResponse<IRequest>> => {
-    return useQuery<AxiosResponse<IRequest>, DefaultError, AxiosResponse<IRequest>, [string]>({
-        queryKey: ["add-task"],
-        enabled: Boolean(params),
-        queryFn: async () => {
-            return await listService.addList<IParams | null, IRequest>(params);
+
+export const useMutateAddTaskList = (): UseMutationResult<
+    AxiosResponse<IRequest, any>,
+    Error,
+    IPayload,
+    unknown
+> => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (payload: IPayload) =>
+            await listService.addList<IRequest>(payload.name, payload.boardId),
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({
+                queryKey: ["get-lists"],
+            });
         },
     });
 };

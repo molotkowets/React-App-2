@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import "./taskCard.css";
+import "./task.css";
 import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
 import { ReactComponent as DateIcon } from "../../assets/icons/date.svg";
 // import { type ITaskLists } from "../task-list/TaskList";
 import EditMenuCard from "../editMenu/EditMenuCard";
 import Priority from "../priority/Priority";
 import Dropdown from "../dropdown/Dropdown";
-import CardBoard from "../cardBoard/CardBoard";
-import { type ITaskLists, type ITasks } from "../task-list/TaskList";
-import { formatDate } from "../../other/formatDate";
+import TaskWindow from "../taskBoard/TaskWindow";
+import { type ITaskLists } from "../task-list/TaskList";
+import { formatDate } from "../../utils/formatDate";
+import { type ITask } from "../../types/queries.types";
 
 export interface TTasks {
     name: string;
@@ -19,38 +20,41 @@ export interface TTasks {
 }
 interface ITaskCard {
     key: number;
-    data: ITasks;
+    data: ITask;
     listId: number;
     taskLists: ITaskLists[];
 }
-export default function TaskCard({ data, listId, taskLists }: ITaskCard): JSX.Element {
+export default function Task({ data, listId, taskLists }: ITaskCard): JSX.Element {
     const [cardBoardModal, setCardBoardModal] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const listName = taskLists.find((i) => i.id === listId)?.name;
 
     return (
-        <div className="tc-container">
-            {cardBoardModal && <CardBoard toClose={setCardBoardModal} />}
+        <div className=" text-gray-400 rounded-8 border-2 p-4 mb-5 relative">
+            {cardBoardModal && (
+                <TaskWindow listName={listName} data={data} toClose={setCardBoardModal} />
+            )}
             <div
                 onClick={() => {
                     setCardBoardModal(true);
                 }}
-                className="tc-btn-close-wrapper">
-                <div className="tc-header">
-                    <h3>{data.name}</h3>
+                className="flex flex-col z-10">
+                <div className="flex justify-between items-center">
+                    <h3 className=" text-black font-medium">{data.name}</h3>
                 </div>
-                <p className="tc-description">{data.description}</p>
-                <span className="tc-date">
-                    <DateIcon className="tc-date-icon" />
+                <p className=" text-left my-p10  leading-5  break-words">{data.description}</p>
+                <span className=" text-left mb-p10 font-semibold">
+                    <DateIcon className="w-4 h-4 pr-4" />
                     {formatDate(data.dueDate)}
                 </span>
                 <Priority priority={data.priority} />
             </div>
-            <div className="tk-menu-icon tl-header-menu">
+            <div className="flex absolute right-0 py-1 px-2 z-10 flex  absolute top-4 right-7">
                 <MenuIcon
                     onClick={() => {
                         setMenuOpen(!menuOpen);
                     }}
-                    className="tl-header-menu-icon"
+                    className="flex h-4 justify-center px-1 cursor-pointer absolute"
                 />
                 {menuOpen && (
                     <EditMenuCard
@@ -61,7 +65,7 @@ export default function TaskCard({ data, listId, taskLists }: ITaskCard): JSX.El
                     />
                 )}
             </div>
-            <div className="tc-input-status">
+            <div className="flex box-border w-full justify-between rounded-4 bg-white p-p10 mt-p10 items-center">
                 <Dropdown listStatus={taskLists} listId={listId} id={data.id} />
             </div>
         </div>

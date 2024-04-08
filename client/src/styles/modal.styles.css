@@ -1,5 +1,5 @@
-.modal-wrapper{
-    display: flex;
+.modal-wrapper {
+    /* display: flex;
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -7,9 +7,9 @@
     left: 0;
     z-index: 10;
     
-    background: #44444444;
+    background: #44444444; */
 }
-.modal-to-close-btn{
+/* .modal-to-close-btn{
     display: flex;
     width: 100vw;
     height: 100vh;
@@ -22,4 +22,4 @@
     flex-direction: column;
     z-index: 15;
     margin: 20px;
-}
+} */

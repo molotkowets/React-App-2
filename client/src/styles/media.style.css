@@ -1,0 +1,10 @@
+@media screen and (max-width: 1200px) {
+    .board-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen and (max-width: 880px) {
+    .board-container {
+        grid-template-columns: 1fr;
+    }
+}

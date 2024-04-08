@@ -1,25 +1,40 @@
-import { type DefaultError, useQuery, type UseQueryResult } from "@tanstack/react-query";
+import { useQueryClient, useMutation, type UseMutationResult } from "@tanstack/react-query";
 import { type AxiosResponse } from "axios";
 import tasksService from "../services/tasks.service";
 import { type ICardForm } from "../components/editCard/EditCard";
-// import { type ICardForm } from "../components/addCard/AddCard";
-export interface IParams {
+import { type ITask } from "../types/queries.types";
+
+interface IData {
     id: number;
     name: string;
-    description: string;
-    dueDate: string;
-    priority: string;
-    taskListId: number;
+    boardId: number;
 }
-export const editTask = (
-    params: ICardForm | null,
-    id: number
-): UseQueryResult<AxiosResponse<IParams>> => {
-    return useQuery<AxiosResponse<IParams>, DefaultError, AxiosResponse<IParams>, [string]>({
-        queryKey: ["add-task"],
-        enabled: Boolean(params),
-        queryFn: async () => {
-            return await tasksService.edit<ICardForm | null, IParams>(params, id);
+
+export interface IPayload {
+    id: number;
+    body: {
+        name: string;
+        description: string;
+        dueDate: string;
+        priority: string;
+        taskListId: number;
+    };
+    // | { taskListId: number };
+}
+export const useMutateEditTask = (): UseMutationResult<
+    AxiosResponse<IData, any>,
+    Error,
+    IPayload,
+    unknown
+> => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (payload: IPayload) =>
+            await tasksService.edit<ICardForm, ITask>(payload.body, payload.id),
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({
+                queryKey: ["get-lists"],
+            });
         },
     });
 };

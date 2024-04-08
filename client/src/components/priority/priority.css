@@ -1,4 +1,4 @@
-.priority{
+/* .priority{
     display: flex;
     background-color: #f3f4f6;
     border-radius: 10px;
@@ -6,14 +6,14 @@
     font-weight: 500;
     font-size: 14px;
     align-items: center;
-}
-.priority-dot{
+} */
+/* .priority-dot{
     width: 7px;
     height: 7px;
     border-radius: 50%;
     margin: 7px;
-}
-.p-dot-low{
+} */
+/* .p-dot-low{
     background: #a4aac6;
 }
 .p-dot-medium{
@@ -24,4 +24,4 @@
 }
 .priority-container{
     display: flex;
-}
+} */

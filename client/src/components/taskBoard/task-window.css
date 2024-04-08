@@ -1,31 +1,29 @@
-.card-board-container{
+/* .task-board-container {
     overflow: hidden;
-}
-.card-board-wrapper{
+} */
+/* .card-board-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.cb-head-line{
+.cb-head-line {
     display: flex;
     justify-content: end;
     padding: 10px;
     background: #5d6481;
 }
-.cb-body{
-    display: flex;
-}
-.cb-b-data{
+
+.cb-b-data {
     display: flex;
     width: 400px;
     flex-direction: column;
     padding: 30px;
 }
-.cd-d-header{
+.cd-d-header {
     display: flex;
     justify-content: space-between;
 }
-.cb-edit-btn{
+.cb-edit-btn {
     display: flex;
     align-items: center;
     height: 25px;
@@ -37,49 +35,47 @@
     border-radius: 4px;
     cursor: pointer;
 }
-.cb-point-icon{
+.cb-point-icon {
     width: 15px;
     height: 15px;
     margin-right: 5px;
 }
-.cb-b-activity{
+.cb-b-activity {
     display: flex;
     flex-direction: column;
     align-items: start;
     width: 300px;
     min-height: 100%;
-    padding: 30px ;
+    padding: 30px;
     background: #f3f4f6;
     overflow: hidden;
 }
-.cb-b-data span{
+.cb-b-data span {
     align-self: start;
     display: flex;
     align-items: center;
     padding: 10px 0;
     width: 150px;
-
 }
-.cb-point-data{
+.cb-point-data {
     display: flex;
     align-items: center;
 }
-.cb-point-data p{
+.cb-point-data p {
     color: #000;
 }
-.cb-description-container{
-display: flex;
-flex-direction: column;
-align-items: start;
-
+.cb-description-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
 }
-.cb-description-container h2{
+.cb-description-container h2 {
     color: #000;
 }
-.cb-b-activity-list{
+.cb-b-activity-list {
     display: flex;
     flex-direction: column;
     align-items: start;
     width: 100%;
     height: 100%;
-}
+} */

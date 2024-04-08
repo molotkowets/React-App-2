@@ -4,5 +4,5 @@ interface IInputError {
     error: string | undefined;
 }
 export default function InputError({ error }: IInputError): JSX.Element {
-    return <div className="input-error">{error}</div>;
+    return <div className=" text-red-500">{error}</div>;
 }

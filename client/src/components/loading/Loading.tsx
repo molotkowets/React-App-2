@@ -1,6 +1,4 @@
 import React from "react";
-import "./loading.css";
-
 export default function Loading(): JSX.Element {
-    return <div className="loading">Loading...</div>;
+    return <div className="flex w-full h-full justify-center items-center">Loading...</div>;
 }

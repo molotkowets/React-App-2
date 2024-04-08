@@ -7,4 +7,5 @@ export class CreateTaskDto extends PickType(TaskEntity, [
   'priority',
   'taskListId',
   'description',
+  'boardId',
 ] as const) {}

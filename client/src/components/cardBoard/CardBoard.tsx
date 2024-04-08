@@ -1,72 +1,38 @@
-import React from "react";
-import "./cardBoard.css";
-import { type IToClose } from "../../types/hook.types";
-import { ReactComponent as CloseIcon } from "../../assets/icons/close.svg";
-import { ReactComponent as StatusIcon } from "../../assets/icons/status.svg";
-import { ReactComponent as DateIcon } from "../../assets/icons/date.svg";
-import { ReactComponent as PriorityIcon } from "../../assets/icons/priority.svg";
-import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
+import React, { useState } from "react";
+import { type IBoard } from "../../types/queries.types";
+import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
+import EditMenu from "../editMenu/EditMenu";
+import InputEditName from "../InputEditName/InputEditName";
+import { NavLink } from "react-router-dom";
 
-export default function CardBoard({ toClose }: IToClose): JSX.Element {
+interface ICardBoard {
+    params: IBoard;
+}
+
+export default function CardBoard({ params }: ICardBoard): JSX.Element {
+    const [editMenu, setEditMenu] = useState(false);
+    const [editName, setEditName] = useState(false);
+
     return (
-        <div className="card-board-wrapper modal-wrapper">
-            <div
-                onClick={() => {
-                    toClose(false);
-                }}
-                className="modal-to-close-btn"></div>
-            <div className="card-board-container modal-container">
-                <div className="cb-head-line">
-                    <div
-                        onClick={() => {
-                            toClose(false);
-                        }}>
-                        <CloseIcon className="close-btn" />
-                    </div>
-                </div>
-                <div className="cb-body">
-                    <div className="cb-b-data">
-                        <div className="cd-d-header">
-                            <h2>Task name</h2>
-                            <button className="cb-edit-btn">
-                                <EditIcon className="cb-point-icon" />
-                                Edit task
-                            </button>
-                        </div>
-                        <div className="cb-point-data">
-                            <span>
-                                <StatusIcon className="cb-point-icon" />
-                                Status
-                            </span>
-                            <p>test</p>
-                        </div>
-                        <div className="cb-point-data">
-                            <span>
-                                <DateIcon className="cb-point-icon" />
-                                Due date
-                            </span>
-                            <p>test</p>
-                        </div>
-                        <div className="cb-point-data">
-                            <span>
-                                <PriorityIcon className="cb-point-icon" />
-                                Priority
-                            </span>
-                            <p>test</p>
-                        </div>
-                        <div className="cb-description-container">
-                            <h2>Description</h2>
-                            <p>tets</p>
-                        </div>
-                    </div>
-                    <div className="cb-b-activity">
-                        <h2>Activity</h2>
-                        <div className="cb-b-activity-list">
-                            <p>test</p>
-                            <p>test</p>
-                        </div>
-                    </div>
-                </div>
+        <div className="w-72 h-52 bg-slate-400 hover:bg-slate-500 flex justify-between overflow-hidden m-5 rounded-8 transition-colors relative">
+            <NavLink className="flex w-full h-full" to={`task-lists/${params.id}`}></NavLink>
+            {editMenu && (
+                <EditMenu toClose={setEditMenu} id={params.id} setEditName={setEditName} />
+            )}
+            <div className="flex absolute w-full justify-between p-5 items-center">
+                {editName ? (
+                    <InputEditName setEditName={setEditName} name={params.name} id={params.id} />
+                ) : (
+                    <h2>{params.name}</h2>
+                )}
+
+                <button
+                    onClick={() => {
+                        setEditMenu(true);
+                    }}
+                    className="flex">
+                    <MenuIcon className="edit-menu w-5 h-5" />
+                </button>
             </div>
         </div>
     );
