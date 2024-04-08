@@ -1,5 +1,5 @@
 import React from "react";
-import "./task-board.css";
+import "./task-window.css";
 import { ReactComponent as CloseIcon } from "../../assets/icons/close.svg";
 import { ReactComponent as StatusIcon } from "../../assets/icons/status.svg";
 import { ReactComponent as DateIcon } from "../../assets/icons/date.svg";
@@ -13,7 +13,7 @@ interface ITaskBoard {
     listName: string | undefined;
 }
 
-export default function TaskBoard({ toClose, data, listName }: ITaskBoard): JSX.Element {
+export default function TaskWindow({ toClose, data, listName }: ITaskBoard): JSX.Element {
     console.log("listName", listName);
     return (
         <div className="card-board-wrapper modal-wrapper">

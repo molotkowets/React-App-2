@@ -6,7 +6,7 @@ import { ReactComponent as DateIcon } from "../../assets/icons/date.svg";
 import EditMenuCard from "../editMenu/EditMenuCard";
 import Priority from "../priority/Priority";
 import Dropdown from "../dropdown/Dropdown";
-import CardBoard from "../taskBoard/TaskBoard";
+import TaskWindow from "../taskBoard/TaskWindow";
 import { type ITaskLists } from "../task-list/TaskList";
 import { formatDate } from "../../utils/formatDate";
 import { type ITask } from "../../types/queries.types";
@@ -32,7 +32,7 @@ export default function Task({ data, listId, taskLists }: ITaskCard): JSX.Elemen
     return (
         <div className="tc-container">
             {cardBoardModal && (
-                <CardBoard listName={listName} data={data} toClose={setCardBoardModal} />
+                <TaskWindow listName={listName} data={data} toClose={setCardBoardModal} />
             )}
             <div
                 onClick={() => {

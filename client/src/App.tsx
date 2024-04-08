@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import TaskBoardPage from "./pages/task-board-page/TaskBoardPage";
 import HomePage from "./pages/home-page/HomePage";
 import Layout from "./layouts/Layout";
+import ErrorPage from "./pages/error-page/ErrorPage";
 
 function App(): JSX.Element {
     return (
@@ -15,6 +16,7 @@ function App(): JSX.Element {
                     <Route index element={<HomePage />} />
                     <Route path="task-lists/:id" element={<TaskBoardPage />} />
                 </Route>
+                <Route path="*" element={<ErrorPage />} />
             </Routes>
         </div>
     );
