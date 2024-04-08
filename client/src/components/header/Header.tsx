@@ -16,18 +16,18 @@ export default function Header({ title }: IHeader): JSX.Element {
     const locationCheck = location.pathname === "/";
 
     return (
-        <div className="header-container">
+        <div className="flex w-full p-7 box-border justify-between">
             <h1>{title}</h1>
 
             {historyModal && <History toClose={setHistoryModal} />}
-            <div className="header-buttons-wrapper">
+            <div className="flex items-center">
                 {!locationCheck && (
                     <button
                         onClick={() => {
                             setHistoryModal(true);
                         }}
-                        className="header-button header-button-his">
-                        <HistoryIcon className="header-button-icon" />
+                        className="flex h-7 items-center border-none rounded-4 cursor-pointer px-p10 ml-p10 font-medium bg-white border-1 border-gray">
+                        <HistoryIcon className="w-5 h-5 pr-2" />
                         History
                     </button>
                 )}

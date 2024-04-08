@@ -6,9 +6,9 @@ interface IPriority {
 }
 export default function Priority({ priority }: IPriority): JSX.Element {
     return (
-        <div className="priority-container">
-            <div className="priority">
-                <div className={`priority-dot p-dot-${priority.toLowerCase()}`} />
+        <div className="flex">
+            <div className="flex  bg-white rounded-8 font-medium items-center">
+                <div className={` w-2 h-2 rounded-per50 m-2 bg-low ${priority.toLowerCase()}`} />
                 {priority}
             </div>
         </div>

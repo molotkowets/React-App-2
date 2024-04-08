@@ -16,8 +16,8 @@ export default function TaskBoardPage(): JSX.Element {
         return <Empty title="You don't have any task lists yet." />;
     }
     return (
-        <div className="task-board-container">
-            <div className="tb-lists-container">
+        <div className=" flex flex-col items-start pb-0 h-full box-border ">
+            <div className="flex flex-row overflow-x-auto px-8 w-full h-full">
                 {response?.data.map((i, key) => (
                     <TaskList list={i} key={key} taskLists={response?.data} />
                 ))}

@@ -1,47 +1,48 @@
 .em-container {
-    display: flex;
-    flex-direction: column;
-    border: solid 1px #c5c5c5;
-    border-radius: 8px;
-    padding: 10px 30px 10px 10px;
-    position: absolute;
-    right: 0;
-    top: 30px;
-    background: #fff;
-    z-index: 6;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* border: solid 1px #c5c5c5; */
+    /* border-radius: 8px; */
+    /* padding: 10px 30px 10px 10px; */
+    /* position: absolute; */
+    /* right: 0; */
+    /* top: 30px; */
+    /* background: #fff;
+    z-index: 6; */
 }
 .em-container-board {
-    display: flex;
-    flex-direction: column;
-    border: solid 1px #c5c5c5;
-    border-radius: 8px;
-    padding: 10px 30px 10px 10px;
-    position: absolute;
-    right: 20px;
-    top: 50px;
-    background: #fff;
-    z-index: 6;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* border: solid 1px #c5c5c5; */
+    /* border-radius: 8px; */
+    /* padding: 10px 30px 10px 10px; */
+    /* position: absolute; */
+    /* right: 20px; */
+    /* top: 50px; */
+    /* background: #fff; */
+    /* z-index: 6; */
 }
 .em-background-button-close {
-    display: flex;
-    position: fixed;
+    /* display: flex;
+    position: fixed; 
     width: 100vw;
-    height: 100vh;
-    top: 0;
+    height: 100vh; */
+    /* background: #333; */
+    /* top: 0;
     left: 0;
-    cursor: pointer;
+    cursor: pointer; */
 }
 .em-button {
-    display: flex;
+    /* display: flex;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 5px 0;
-    inline-size: max-content;
-    align-items: center;
+    padding: 5px 0; */
+    /* inline-size: max-content;
+    align-items: center; */
 }
 .em-btn-icon {
-    width: 20px;
+    /* width: 20px;
     height: 20px;
-    padding: 0 5px;
+    padding: 0 5px; */
 }

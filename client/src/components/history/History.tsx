@@ -25,14 +25,14 @@ export default function History({ toClose }: IToClose): JSX.Element {
         console.log("closeHistory");
     }
     return (
-        <div className="history-container modal-wrapper">
-            <div onClick={toCloseHistory} className="modal-to-close-btn"></div>
-            <div className="h-list-wrapper">
-                <div className="h-l-header">
+        <div className="flex justify-end items-center flex fixed w-screen h-screen top-0 left-0 z-10 bg-gray44">
+            <div onClick={toCloseHistory} className="flex w-screen h-screen absolute"></div>
+            <div className="flex flex-col w-100 h-full bg-white z-20">
+                <div className="flex items-center justify-between p-5 bg-blue text-white">
                     <h2>History</h2>
-                    <CloseIcon onClick={toCloseHistory} className="close-btn" />
+                    <CloseIcon onClick={toCloseHistory} className="w-3 h-3" />
                 </div>
-                <ul className="history-list">
+                <ul className="flex flex-col items-start p-8">
                     {data?.data.map((e, key) => (
                         <HistoryItem key={key} message={historyTransforms(e)} />
                     ))}

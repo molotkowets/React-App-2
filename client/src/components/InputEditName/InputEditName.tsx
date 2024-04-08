@@ -23,7 +23,7 @@ export default function InputEditName({ setEditName, name, id }: IParams): JSX.E
     };
 
     return (
-        <form className="input-form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="flex pr-p10" onSubmit={handleSubmit(onSubmit)}>
             <input
                 {...register("name", {
                     required: "Name is require field!",

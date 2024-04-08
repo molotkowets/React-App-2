@@ -37,9 +37,11 @@ export default function CreateButton({ locationCheck }: ICreateButton): JSX.Elem
                 setCreateNewList(false);
             }}>
             {createNewList ? (
-                <form onSubmit={handleSubmit(onSubmit)} className="header-button header-button-add">
-                    <button className="header-btn-send">
-                        <AddIcon className="header-button-icon" />
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="flex h-7 items-center border-none rounded-4 cursor-pointer px-p10 ml-p10 font-medium bg-blue">
+                    <button className=" border-none outline-none bg-none">
+                        <AddIcon className="w-5 h-5 pr-2" />
                     </button>
                     <input
                         {...register("name", {
@@ -54,8 +56,8 @@ export default function CreateButton({ locationCheck }: ICreateButton): JSX.Elem
                     onClick={() => {
                         setCreateNewList(true);
                     }}
-                    className="header-button header-button-add">
-                    <AddIcon className="header-button-icon" />
+                    className="flex h-7 items-center border-none rounded-4 cursor-pointer px-p10 ml-p10 font-medium bg-blue text-white">
+                    <AddIcon className="w-5 h-5 pr-2" />
                     {locationCheck ? "Create new board" : "Create new list"}
                 </button>
             )}

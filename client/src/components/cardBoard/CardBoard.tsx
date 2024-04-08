@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./card-board.css";
 import { type IBoard } from "../../types/queries.types";
 import { ReactComponent as MenuIcon } from "../../assets/icons/menu.svg";
 import EditMenu from "../editMenu/EditMenu";
@@ -15,12 +14,12 @@ export default function CardBoard({ params }: ICardBoard): JSX.Element {
     const [editName, setEditName] = useState(false);
 
     return (
-        <div className="card-board-container">
-            <NavLink className="card-board-skin-button" to={`task-lists/${params.id}`}></NavLink>
+        <div className="w-72 h-52 bg-slate-400 hover:bg-slate-500 flex justify-between overflow-hidden m-5 rounded-8 transition-colors relative">
+            <NavLink className="flex w-full h-full" to={`task-lists/${params.id}`}></NavLink>
             {editMenu && (
                 <EditMenu toClose={setEditMenu} id={params.id} setEditName={setEditName} />
             )}
-            <div className="cb-header">
+            <div className="flex absolute w-full justify-between p-5 items-center">
                 {editName ? (
                     <InputEditName setEditName={setEditName} name={params.name} id={params.id} />
                 ) : (
@@ -31,8 +30,8 @@ export default function CardBoard({ params }: ICardBoard): JSX.Element {
                     onClick={() => {
                         setEditMenu(true);
                     }}
-                    className="cb-button">
-                    <MenuIcon className="edit-menu" />
+                    className="flex">
+                    <MenuIcon className="edit-menu w-5 h-5" />
                 </button>
             </div>
         </div>

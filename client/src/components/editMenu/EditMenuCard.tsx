@@ -28,7 +28,7 @@ export default function EditMenuCard({ toClose, id, cardData, taskLists }: IEdit
 
     return (
         <div>
-            <div className="em-container">
+            <div className="flex flex-col rounded-8 p-p10 pr-p30 absolute right-0 top-8 z-10 bg-white">
                 {editCardModal && (
                     <EditCard
                         taskLists={taskLists}
@@ -41,22 +41,22 @@ export default function EditMenuCard({ toClose, id, cardData, taskLists }: IEdit
                         setEditCardModal(true);
                         // toClose(false);
                     }}
-                    className="em-button">
-                    <Edit className="em-btn-icon" /> <span>Edit</span>
+                    className="flex bg-none border-none cursor-pointer py-1">
+                    <Edit className="w-5 h-5 px-1" /> <span>Edit</span>
                 </button>
                 <button
                     onClick={() => {
                         mutate(id);
                     }}
-                    className="em-button">
-                    <TrashCan className="em-btn-icon" /> <span>Delete</span>
+                    className="flex bg-none border-none cursor-pointer py-1">
+                    <TrashCan className="w-5 h-5 px-1" /> <span>Delete</span>
                 </button>
             </div>
             <div
                 onClick={() => {
                     toClose(false);
                 }}
-                className="em-background-button-close"></div>
+                className="flex fixed w-screen h-screen top-0 left-0 cursor-pointer"></div>
         </div>
     );
 }

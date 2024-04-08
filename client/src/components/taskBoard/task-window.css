@@ -1,7 +1,7 @@
-.task-board-container {
+/* .task-board-container {
     overflow: hidden;
-}
-.card-board-wrapper {
+} */
+/* .card-board-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,9 +12,7 @@
     padding: 10px;
     background: #5d6481;
 }
-.cb-body {
-    display: flex;
-}
+
 .cb-b-data {
     display: flex;
     width: 400px;
@@ -80,4 +78,4 @@
     align-items: start;
     width: 100%;
     height: 100%;
-}
+} */

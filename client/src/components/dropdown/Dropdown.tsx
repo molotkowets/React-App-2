@@ -25,11 +25,10 @@ export default function Dropdown({ listStatus, listId, id }: IDropDown): JSX.Ele
     return (
         <select
             onChange={(e) => {
-                // setSelectVal(Number(e.target.value));
                 console.log(e.target.value);
                 mutate({ taskListId: Number(e.target.value), id });
             }}
-            className="dropdown-input"
+            className=" bg-no-repeat border-none w-full font-semibold outline-none"
             name="select"
             defaultValue={"value0"}>
             <option value="value0" disabled>

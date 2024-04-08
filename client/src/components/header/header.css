@@ -1,15 +1,15 @@
-.header-container {
+/* .header-container {
     display: flex;
     width: 100%;
     padding: 30px;
     box-sizing: border-box;
     justify-content: space-between;
-}
-.header-buttons-wrapper {
+} */
+/* .header-buttons-wrapper {
     display: flex;
     align-items: center;
-}
-.header-button {
+} */
+/* .header-button {
     display: flex;
     height: 30px;
     align-items: center;
@@ -23,9 +23,9 @@
 .header-button-his {
     background: white;
     border: solid 1px #5d6481;
-}
-.header-button-icon {
+} */
+/* .header-button-icon {
     width: 20px;
     height: 20px;
     padding-right: 6px;
-}
+} */

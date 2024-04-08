@@ -41,26 +41,26 @@ export default function EditCard({ toClose, cardData, taskLists }: IAddCard): JS
     };
 
     return (
-        <div className="add-card-wrapper modal-wrapper">
+        <div className="add-card-wrapper flex justify-center items-center flex fixed w-screen h-screen top-0 left-0 z-10 bg-gray44">
             <div
                 onClick={() => {
                     toClose(false);
                 }}
-                className="modal-to-close-btn"></div>
-            <div className="modal-container add-card-container">
-                <div className="add-modal-header cb-head-line">
+                className="flex w-screen h-screen absolute"></div>
+            <div className="flex rounded-8 bg-white flex-col z-20 m-5 items-center justify-center overflow-hidden">
+                <div className="box-border w-full flex justify-end p-p10 bg-blue">
                     <div
                         onClick={() => {
                             toClose(false);
                         }}>
-                        <CloseIcon className="close-btn" />
+                        <CloseIcon className="w-3 h-3" />
                     </div>
                 </div>
-                <div className="cb-body">
+                <div className="flex flex-row p-5">
                     <h2>Add task</h2>
-                    <div className="cb-b-data">
-                        <form className="cb-form" onSubmit={handleSubmit(onSubmit)}>
-                            <div className="cb-f-input-box">
+                    <div className="flex w100 flex-col p-7">
+                        <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+                            <div className="flex flex-col my-p10 items-start">
                                 <label htmlFor="name">Name:</label>
                                 <input
                                     {...register("name", {
@@ -71,7 +71,7 @@ export default function EditCard({ toClose, cardData, taskLists }: IAddCard): JS
                                 />
                                 {errors.name != null && <InputError error={errors.name?.message} />}
                             </div>
-                            <div className="cb-f-input-box">
+                            <div className="flex flex-col my-p10 items-start">
                                 <label htmlFor="Description">Description:</label>
                                 <textarea
                                     {...register("description", {
@@ -82,7 +82,7 @@ export default function EditCard({ toClose, cardData, taskLists }: IAddCard): JS
                                     <InputError error={errors.description?.message} />
                                 )}
                             </div>
-                            <div className="cb-f-input-box">
+                            <div className="flex flex-col my-p10 items-start">
                                 <label htmlFor="dueDate">Due date:</label>
                                 <input
                                     {...register("dueDate", {
@@ -92,7 +92,7 @@ export default function EditCard({ toClose, cardData, taskLists }: IAddCard): JS
                                     type="datetime-local"
                                 />
                             </div>
-                            <div className="cb-f-input-box">
+                            <div className="flex flex-col my-p10 items-start">
                                 <label htmlFor="name">Priority:</label>
                                 <select
                                     {...register("priority", {
@@ -104,7 +104,7 @@ export default function EditCard({ toClose, cardData, taskLists }: IAddCard): JS
                                     <option value="high">high</option>
                                 </select>
                             </div>
-                            <div className="cb-f-input-box">
+                            <div className="flex flex-col my-p10 items-start">
                                 <label htmlFor="name">Task list:</label>
                                 <select
                                     {...register("taskListId", {

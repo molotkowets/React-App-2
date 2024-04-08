@@ -1,5 +1,4 @@
 import React from "react";
-import "./home-page.css";
 import CardBoard from "../../components/cardBoard/CardBoard";
 import { getBoards } from "../../queries/get-boards.query";
 import Loading from "../../components/loading/Loading";
@@ -15,7 +14,7 @@ export default function HomePage(): JSX.Element {
         return <Empty title="You don't have any boards yet." />;
     }
     return (
-        <div className="board-container">
+        <div className="flex w-full h-full flex-wrap p-10 items-stretch content-start">
             {data?.data.map((b, key) => <CardBoard key={key} params={b} />)}
         </div>
     );

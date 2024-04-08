@@ -4,5 +4,5 @@ interface IHistoryItem {
     message: string;
 }
 export default function HistoryItem({ message }: IHistoryItem): JSX.Element {
-    return <li className="history-item">{message}</li>;
+    return <li className=" mb-p10 ml-p10">{message}</li>;
 }

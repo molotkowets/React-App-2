@@ -30,7 +30,7 @@ export default function Task({ data, listId, taskLists }: ITaskCard): JSX.Elemen
     const listName = taskLists.find((i) => i.id === listId)?.name;
 
     return (
-        <div className="tc-container">
+        <div className=" text-gray-400 rounded-8 border-2 p-4 mb-5 relative">
             {cardBoardModal && (
                 <TaskWindow listName={listName} data={data} toClose={setCardBoardModal} />
             )}
@@ -38,23 +38,23 @@ export default function Task({ data, listId, taskLists }: ITaskCard): JSX.Elemen
                 onClick={() => {
                     setCardBoardModal(true);
                 }}
-                className="tc-btn-close-wrapper">
-                <div className="tc-header">
-                    <h3>{data.name}</h3>
+                className="flex flex-col z-10">
+                <div className="flex justify-between items-center">
+                    <h3 className=" text-black font-medium">{data.name}</h3>
                 </div>
-                <p className="tc-description">{data.description}</p>
-                <span className="tc-date">
-                    <DateIcon className="tc-date-icon" />
+                <p className=" text-left my-p10  leading-5  break-words">{data.description}</p>
+                <span className=" text-left mb-p10 font-semibold">
+                    <DateIcon className="w-4 h-4 pr-4" />
                     {formatDate(data.dueDate)}
                 </span>
                 <Priority priority={data.priority} />
             </div>
-            <div className="tk-menu-icon tl-header-menu">
+            <div className="flex absolute right-0 py-1 px-2 z-10 flex  absolute top-4 right-7">
                 <MenuIcon
                     onClick={() => {
                         setMenuOpen(!menuOpen);
                     }}
-                    className="tl-header-menu-icon"
+                    className="flex h-4 justify-center px-1 cursor-pointer absolute"
                 />
                 {menuOpen && (
                     <EditMenuCard
@@ -65,7 +65,7 @@ export default function Task({ data, listId, taskLists }: ITaskCard): JSX.Elemen
                     />
                 )}
             </div>
-            <div className="tc-input-status">
+            <div className="flex box-border w-full justify-between rounded-4 bg-white p-p10 mt-p10 items-center">
                 <Dropdown listStatus={taskLists} listId={listId} id={data.id} />
             </div>
         </div>

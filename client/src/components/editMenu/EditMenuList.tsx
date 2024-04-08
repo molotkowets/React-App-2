@@ -25,17 +25,17 @@ export default function EditMenuList({
 
     return (
         <div>
-            <div className="em-container">
+            <div className="flex flex-col rounded-8 p-p10 pr-p30 absolute right-0 top-8 z-10 bg-white">
                 <button
                     onClick={() => {
                         setEditListName(true);
                         toClose(false);
                     }}
-                    className="em-button">
-                    <Edit className="em-btn-icon" /> <span>Edit</span>
+                    className="flex bg-none border-none cursor-pointer py-1">
+                    <Edit className="w-5 h-5 px-1" /> <span>Edit</span>
                 </button>
-                <button onClick={addClick} className="em-button">
-                    <Add className="em-btn-icon" />
+                <button onClick={addClick} className="flex bg-none border-none cursor-pointer py-1">
+                    <Add className="w-5 h-5 px-1" />
                     <span>Add new card</span>
                 </button>
                 <button
@@ -43,15 +43,15 @@ export default function EditMenuList({
                         deleteList.mutate(id);
                         toClose(false);
                     }}
-                    className="em-button">
-                    <TrashCan className="em-btn-icon" /> <span>Delete</span>
+                    className="flex bg-none border-none cursor-pointer py-1">
+                    <TrashCan className="w-5 h-5 px-1" /> <span>Delete</span>
                 </button>
             </div>
             <div
                 onClick={() => {
                     toClose(false);
                 }}
-                className="em-background-button-close"></div>
+                className="flex fixed w-screen h-screen top-0 left-0 cursor-pointer"></div>
         </div>
     );
 }

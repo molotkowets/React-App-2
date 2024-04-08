@@ -1,12 +1,11 @@
-.task-board-container {
+/* .task-board-container {
     display: flex;
     flex-direction: column;
     align-items: start;
     padding-bottom: 0;
     /* height: 100%; */
-    box-sizing: border-box;
-}
-.tb-lists-container {
+
+/* .tb-lists-container {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
@@ -15,4 +14,4 @@
     padding: 0 35px;
     width: 100%;
     height: 100%;
-}
+} */

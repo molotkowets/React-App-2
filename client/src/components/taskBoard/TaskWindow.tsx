@@ -16,59 +16,59 @@ interface ITaskBoard {
 export default function TaskWindow({ toClose, data, listName }: ITaskBoard): JSX.Element {
     console.log("listName", listName);
     return (
-        <div className="card-board-wrapper modal-wrapper">
+        <div className="card-board-wrapper flex justify-center items-center flex fixed w-screen h-screen top-0 left-0 z-10 bg-gray44">
             <div
                 onClick={() => {
                     toClose(false);
                 }}
-                className="modal-to-close-btn"></div>
-            <div className="task-board-container modal-container">
-                <div className="cb-head-line">
+                className="flex w-screen h-screen absolute"></div>
+            <div className="hidden flex flex-col items-start pb-0 h-full box-border modal-container">
+                <div className="flex justify-end p-p10 bg-blue">
                     <div
                         onClick={() => {
                             toClose(false);
                         }}>
-                        <CloseIcon className="close-btn" />
+                        <CloseIcon className="w-3 h-3" />
                     </div>
                 </div>
-                <div className="cb-body">
-                    <div className="cb-b-data">
-                        <div className="cd-d-header">
+                <div className="flex flex-row p-5">
+                    <div className="flex w100 flex-col p-7">
+                        <div className=" flex justify-between">
                             <h2>Name: {data.name}</h2>
-                            <button className="cb-edit-btn">
-                                <EditIcon className="cb-point-icon" />
+                            <button className=" flex items-center h-6 px-2 bg-none outline-none rounded-4 cursor-pointer border-gray border-1 border-solid">
+                                <EditIcon className="w-4 h-4 mr-1" />
                                 Edit task
                             </button>
                         </div>
-                        <div className="cb-point-data">
+                        <div className="flex items-center">
                             <span>
-                                <StatusIcon className="cb-point-icon" />
+                                <StatusIcon className="w-4 h-4 mr-1" />
                                 Status
                             </span>
                             <p>{listName}</p>
                         </div>
-                        <div className="cb-point-data">
+                        <div className="flex items-center">
                             <span>
-                                <DateIcon className="cb-point-icon" />
+                                <DateIcon className="w-4 h-4 mr-1" />
                                 Due date
                             </span>
                             <p>test</p>
                         </div>
-                        <div className="cb-point-data">
+                        <div className="flex items-center">
                             <span>
-                                <PriorityIcon className="cb-point-icon" />
+                                <PriorityIcon className="w-4 h-4 mr-1" />
                                 Priority
                             </span>
                             <p>{data.priority}</p>
                         </div>
-                        <div className="cb-description-container">
-                            <h2>Description</h2>
+                        <div className="flex flex-col items-center">
+                            <h2 className=" text-white">Description</h2>
                             <p>{data.description}</p>
                         </div>
                     </div>
-                    <div className="cb-b-activity">
+                    <div className="flex justify-center items-start w-72 min-h-7">
                         <h2>Activity</h2>
-                        <div className="cb-b-activity-list">
+                        <div className="flex flex-col items-start w-full h-full">
                             <p>test</p>
                         </div>
                     </div>
