@@ -21,7 +21,7 @@ export default function Dropdown({ listStatus, listId, id }: IDropDown): JSX.Ele
     // }
     const selectList = listStatus.filter((i) => i.id !== listId);
 
-    console.log("id:", id, "listId:", listId, "selectList:", selectList);
+    // console.log("id:", id, "listId:", listId, "selectList:", selectList);
     return (
         <select
             onChange={(e) => {
