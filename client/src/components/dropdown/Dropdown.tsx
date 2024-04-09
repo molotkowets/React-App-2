@@ -28,7 +28,7 @@ export default function Dropdown({ listStatus, listId, id }: IDropDown): JSX.Ele
                 console.log(e.target.value);
                 mutate({ taskListId: Number(e.target.value), id });
             }}
-            className=" bg-no-repeat border-none w-full font-semibold outline-none"
+            className=" bg-no-repeat border-none w-full font-semibold outline-none bg-gray-200 rounded-4 px-3 py-1"
             name="select"
             defaultValue={"value0"}>
             <option value="value0" disabled>

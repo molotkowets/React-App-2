@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeepPartial, Repository } from 'typeorm';
 
 import { HistoryEntity } from './entities/history.entity';
+import { FetchHistoryQueryDto } from './dto/fetch-history.query.dto';
 
 @Injectable()
 export class HistoryService {
@@ -16,7 +17,9 @@ export class HistoryService {
     await this._historyRepository.save(history);
   }
 
-  findAll(): Promise<HistoryEntity[]> {
-    return this._historyRepository.find();
+  findAll(query?: FetchHistoryQueryDto): Promise<HistoryEntity[]> {
+    return this._historyRepository.find({
+      where: query,
+    });
   }
 }
