@@ -8,6 +8,8 @@ import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
 import { type ITAskFromList } from "../../types/queries.types";
 import { formatDate } from "../../utils/formatDate";
 import { getTaskHistory } from "../../queries/get-task-history.query";
+import { historyTransforms } from "../history/History";
+import HistoryItem from "../histiryItem/HistoryItem";
 
 interface ITaskBoard {
     toClose: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,8 +18,9 @@ interface ITaskBoard {
 }
 export default function TaskWindow({ toClose, data, listName }: ITaskBoard): JSX.Element {
     const { data: history } = getTaskHistory({ entityName: "task_entity", entityId: data.id });
-
-    console.log(history?.data);
+    // if (history?.data !== undefined) {
+    //     console.log(historyTransforms(history?.data[0]));
+    // }
 
     return (
         <div className="card-board-wrapper flex justify-center items-center flex fixed w-screen h-screen top-0 left-0 z-10 bg-gray44">
@@ -72,9 +75,11 @@ export default function TaskWindow({ toClose, data, listName }: ITaskBoard): JSX
                         </div>
                     </div>
                     <div className="flex flex-col justify-center items-start w-72 min-h-7 bg-gray-100 p-5">
-                        <h2 className=" text-black">Activity</h2>
+                        <h2 className=" text-black mb-4">Activity</h2>
                         <div className="flex flex-col items-start w-full h-full">
-                            <p>{"test"}</p>
+                            {history?.data.map((e, key) => (
+                                <HistoryItem key={key} message={historyTransforms(e)} />
+                            ))}
                         </div>
                     </div>
                 </div>

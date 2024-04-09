@@ -59,7 +59,7 @@ const valueFormat = (
     return value[fieldType === "oldValue" ? "oldValue" : "newValue"];
 };
 
-const historyTransforms = (data: IHistory): string => {
+export const historyTransforms = (data: IHistory): string => {
     // console.log("history = ", data);
     if (data.action === HistoryActionEnum.CREATE) {
         const name = data?.data.input?.name;
