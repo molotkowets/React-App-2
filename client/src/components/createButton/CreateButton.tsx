@@ -22,35 +22,39 @@ export default function CreateButton({ locationCheck }: ICreateButton): JSX.Elem
         if (locationCheck) {
             addBoardMutation.mutate(data);
         } else {
-            console.log("if - list");
             addTaskList.mutate({ ...data, boardId: Number(id) });
         }
+        console.log("test Form");
 
         setValue("name", "");
         setCreateNewList(false);
     };
 
     return (
-        <div
-            onBlur={() => {
-                setValue("name", "");
-                setCreateNewList(false);
-            }}>
+        <div>
             {createNewList ? (
-                <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className="flex h-7 items-center border-none rounded-4 cursor-pointer px-p10 ml-p10 font-medium bg-blue">
-                    <button className=" border-none outline-none bg-none">
-                        <AddIcon className="w-5 h-5 pr-2" />
-                    </button>
-                    <input
-                        {...register("name", {
-                            required: "Name is require field!",
-                        })}
-                        type="text"
-                        placeholder="Enter name"
-                    />
-                </form>
+                <div className=" relative">
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="flex h-7 items-center border-none rounded-4 cursor-pointer px-p10 ml-p10 relative z-20 font-medium bg-blue">
+                        <button type="submit" className=" border-none outline-none bg-none">
+                            <AddIcon className="w-5 h-5 pr-2" />
+                        </button>
+                        {/* <input type="submit" /> */}
+                        <input
+                            {...register("name", {
+                                required: "Name is require field!",
+                            })}
+                            type="text"
+                            placeholder="Enter name"
+                        />
+                    </form>
+                    <div
+                        onClick={() => {
+                            setCreateNewList(false);
+                        }}
+                        className=" bg-gray44 w-screen h-screen fixed top-0 left-0 z-10"></div>
+                </div>
             ) : (
                 <button
                     onClick={() => {

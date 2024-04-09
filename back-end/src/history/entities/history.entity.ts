@@ -7,6 +7,8 @@ import {
 
 import { HistoryActionEnum } from '../enums/history-action.enum';
 import { HistoryEntitiesEnum } from '../enums/history-entities.enum';
+import { IsEnum, IsInt, IsNotEmpty, IsPositive } from 'class-validator';
+import { Type } from 'class-transformer';
 
 @Entity({
   name: 'history',
@@ -25,6 +27,8 @@ export class HistoryEntity {
   })
   action: HistoryActionEnum;
 
+  @IsNotEmpty()
+  @IsEnum(HistoryEntitiesEnum)
   @Column({
     type: 'enum',
     enum: HistoryEntitiesEnum,
@@ -38,6 +42,10 @@ export class HistoryEntity {
     input: Record<string, any>; // [{ field: 'taskListId', oldValue: { id: 1, name: 'oldName ' }, newValue: { id: 2, name: 'New name' } }];
   };
 
+  @IsNotEmpty()
+  @IsInt()
+  @IsPositive()
+  @Type(() => Number)
   @Column({ type: 'int', name: 'entity_id' })
   entityId: number;
 

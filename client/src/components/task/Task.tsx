@@ -65,7 +65,7 @@ export default function Task({ data, listId, taskLists }: ITaskCard): JSX.Elemen
                     />
                 )}
             </div>
-            <div className="flex box-border w-full justify-between rounded-4 bg-white p-p10 mt-p10 items-center">
+            <div className="flex box-border w-full justify-between rounded-4  bg-gray-200 mt-p10 items-center">
                 <Dropdown listStatus={taskLists} listId={listId} id={data.id} />
             </div>
         </div>

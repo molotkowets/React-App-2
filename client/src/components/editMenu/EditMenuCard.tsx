@@ -16,19 +16,12 @@ interface IEditMenu {
     taskLists: ITaskLists[];
 }
 export default function EditMenuCard({ toClose, id, cardData, taskLists }: IEditMenu): JSX.Element {
-    // const [deleteId, setDeleteId] = useState<number | null>(null);
     const [editCardModal, setEditCardModal] = useState(false);
     const { mutate } = useMutateDeleteTask();
-    // const navigate = useNavigate();
-    // const { status } = deleteTask(deleteId);
-
-    // if (status === "success") {
-    //     navigate(0);
-    // }
 
     return (
         <div>
-            <div className="flex flex-col rounded-8 p-p10 pr-p30 absolute right-0 top-8 z-10 bg-white">
+            <div className="flex flex-col rounded-8 p-p10 pr-p30 absolute right-0 top-8 z-10 bg-white border-1 ">
                 {editCardModal && (
                     <EditCard
                         taskLists={taskLists}

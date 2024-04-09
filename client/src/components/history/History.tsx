@@ -25,7 +25,7 @@ export default function History({ toClose }: IToClose): JSX.Element {
         console.log("closeHistory");
     }
     return (
-        <div className="flex justify-end items-center flex fixed w-screen h-screen top-0 left-0 z-10 bg-gray44">
+        <div className="flex justify-end items-center flex fixed w-screen h-screen top-0 left-0 z-20 bg-gray44">
             <div onClick={toCloseHistory} className="flex w-screen h-screen absolute"></div>
             <div className="flex flex-col w-100 h-full bg-white z-20">
                 <div className="flex items-center justify-between p-5 bg-blue text-white">
@@ -59,7 +59,7 @@ const valueFormat = (
     return value[fieldType === "oldValue" ? "oldValue" : "newValue"];
 };
 
-const historyTransforms = (data: IHistory): string => {
+export const historyTransforms = (data: IHistory): string => {
     // console.log("history = ", data);
     if (data.action === HistoryActionEnum.CREATE) {
         const name = data?.data.input?.name;
