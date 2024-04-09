@@ -3,12 +3,13 @@ import "./input.css";
 import { type ICardForm } from "../addCard/AddCard";
 import { type UseFormRegister } from "react-hook-form";
 
-interface IInput {
+export interface IInput {
     register: UseFormRegister<ICardForm>;
     name: string;
     type: string;
+    placeholder: string;
 }
-export default function Input({ register }: IInput): JSX.Element {
+export default function Input({ register, name, type, placeholder }: IInput): JSX.Element {
     return (
         <div>
             <input
@@ -16,7 +17,10 @@ export default function Input({ register }: IInput): JSX.Element {
                 {
                     required: true,
                 })}
-                type="text"
+                className="input"
+                type={type}
+                name={name}
+                placeholder={placeholder}
             />
         </div>
     );
