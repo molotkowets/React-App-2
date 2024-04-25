@@ -26,8 +26,8 @@ export default function AddCard({ toClose, taskLists, list }: IAddCard): JSX.Ele
         formState: { errors },
     } = useForm<ICardForm>();
 
-    const { mutate, isSuccess } = useMutateAddCard();
-
+    const { mutate, isSuccess, isPending } = useMutateAddCard();
+    console.log(isPending);
     const onSubmit: SubmitHandler<ICardForm> = (data) => {
         mutate({ ...data, boardId: list.id });
         console.log(isSuccess);
