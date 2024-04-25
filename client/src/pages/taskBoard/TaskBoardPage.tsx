@@ -27,6 +27,7 @@ export default function TaskBoardPage(): JSX.Element {
     if (status === "success") {
         navigate(0);
     }
+    // console.log(isLoading);
 
     if (isLoading) {
         console.log("loading");
