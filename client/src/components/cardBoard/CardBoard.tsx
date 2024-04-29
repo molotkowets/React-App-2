@@ -14,7 +14,7 @@ export default function CardBoard({ params }: ICardBoard): JSX.Element {
     const [editName, setEditName] = useState(false);
 
     return (
-        <div className="w-72 h-52 bg-slate-400 hover:bg-slate-500 flex justify-between overflow-hidden m-5 rounded-8 transition-colors relative">
+        <div className=" w-48 h-28 bg-slate-400 hover:bg-slate-500 flex justify-between overflow-hidden m-5 rounded-4 transition-colors relative size-16 font-bold text-white ">
             <NavLink className="flex w-full h-full" to={`task-lists/${params.id}`}></NavLink>
             {editMenu && (
                 <EditMenu toClose={setEditMenu} id={params.id} setEditName={setEditName} />
